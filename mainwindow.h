@@ -25,11 +25,17 @@ public:
     void on_transRotBtn_clicked(int);
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
+    void checkParity();
+    int result; // 1 game on, 0 won, -1 lost
 
-private slots:
+public slots:
+    void onTimerSignal();
 private:
     Ui::MainWindow *ui;
     QLabel *statusLabel;
+    int timerId;
+protected:
+    void timerEvent(QTimerEvent *event);
 };
 
 #endif // MAINWINDOW_H
