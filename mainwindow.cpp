@@ -11,7 +11,21 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->graph->resize(480,480);
     result = 1;
-    timerId = startTimer(1000);
+    timerId = startTimer(500);
+
+    on_transRotBtn_clicked(180);
+    srand(time(NULL));
+    switch (rand()%3) {
+        case 0:
+            on_transRotBtn_clicked(90);
+            break;
+        case 1:
+            on_transRotBtn_clicked(180);
+            break;
+        case 2:
+            on_transRotBtn_clicked(-90);
+            break;
+    }
 }
 
 MainWindow::~MainWindow()
@@ -125,6 +139,7 @@ void MainWindow::checkParity(){
         killTimer(timerId);
         result = -1;
         QMessageBox msgBox;
+        msgBox.setWindowTitle("Game Over");
         msgBox.setText("Oops! You lost");
         msgBox.exec();
     }
@@ -133,6 +148,7 @@ void MainWindow::checkParity(){
             killTimer(timerId);
             result = 0;
             QMessageBox msgBox;
+            msgBox.setWindowTitle("Game Over");
             msgBox.setText("Hurray!! You won");
             msgBox.exec();
         }
